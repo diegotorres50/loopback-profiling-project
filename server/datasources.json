@@ -1,1 +1,12 @@
-{}
+{
+  "profiling_mongodb_ds": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "mongodb://localhost:27017/contentProfiling",
+    "database": "contentProfiling",
+    "password": "",
+    "name": "profiling_mongodb_ds",
+    "user": "",
+    "connector": "mongodb"
+  }
+}
