@@ -1,0 +1,41 @@
+{
+  "name": "contentSections",
+  "plural": "content-sections",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "_id": {
+      "type": "string",
+      "required": true,
+      "id": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "parent": {
+      "type": "string"
+    },
+    "status": {
+      "type": "boolean",
+      "default": true
+    },
+    "volume": {
+      "type": "string",
+      "default": "COLD"
+    },
+    "desktopConf": {
+      "type": "object"
+    },
+    "mobileConf": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
