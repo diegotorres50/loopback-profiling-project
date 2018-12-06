@@ -21,6 +21,9 @@ module.exports = function (oauthUtils) {
   /* Aqui crear las funciones que hacen referencia al token */
   oauthUtils.getUserDatabyToken = function (req, cb) {
     //
+    console.log('getUserDatabyToken...')
+
+    //
     let reqToken = oauthUtils.getTokenFromRequestHeader(req)
 
     // Validamos que el usuario sea valido
@@ -33,6 +36,7 @@ module.exports = function (oauthUtils) {
       .catch((err) => {
         // Handle any error that occurred in any of the previous
         // promises in the chain.
+        console.log('buuu from getUserDatabyToken...')
         err.status = 401
         err.result = 'Unauthorized or Forbidden or Not Found'
         cb(err)

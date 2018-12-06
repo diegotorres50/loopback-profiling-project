@@ -34,5 +34,11 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "settings": {
+    "strict": false,
+    "forceId": false,
+    "replaceOnPUT": true,
+    "idInjection": false
+  }
 }
