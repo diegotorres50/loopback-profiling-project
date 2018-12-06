@@ -1,5 +1,8 @@
 {
   "name": "contentSections",
+  "http": {
+    "path": "content-sections"
+  },
   "plural": "content-sections",
   "base": "PersistedModel",
   "idInjection": false,
