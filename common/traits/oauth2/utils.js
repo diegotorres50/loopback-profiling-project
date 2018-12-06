@@ -38,10 +38,4 @@ module.exports = function (oauthUtils) {
         cb(err)
       })
   }
-
-  oauthUtils.remoteMethod('getUserDatabyToken', {
-    isStatic: true,
-    accepts: { arg: 'req', type: 'object' },
-    returns: { arg: 'accessToken', type: 'object' }
-  })
 }

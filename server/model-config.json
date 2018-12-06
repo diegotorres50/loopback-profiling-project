@@ -30,5 +30,9 @@
   "oauthUtils": {
     "dataSource": false,
     "public": true
+  },
+  "themesByUser": {
+    "dataSource": "profiling_mongodb_ds",
+    "public": true
   }
 }
