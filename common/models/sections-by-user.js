@@ -35,16 +35,6 @@ module.exports = function (Sectionsbyuser) {
     'setSectionByUser',
     {
       http: { path: '/set-section-by-user', verb: 'get' },
-      accepts: [
-        { arg: 'ACCESS_TOKEN',
-          type: 'string',
-          required: true,
-          documented: true,
-          description: [
-            'User access token'
-          ]
-        }
-      ],
       returns: { arg: 'data', type: 'object' }
     }
   )

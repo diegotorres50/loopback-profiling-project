@@ -1,0 +1,38 @@
+{
+  "name": "themesByUser",
+  "http": {
+    "path": "themes-by-user"
+  },
+  "plural": "themes-by-user",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "_id": {
+      "type": "string",
+      "required": true,
+      "id": true
+    },
+    "userData": {
+      "type": "object"
+    },
+    "clientId": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array"
+    },
+    "caricaturists": {
+      "type": "array"
+    },
+    "columnists": {
+      "type": "array"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
