@@ -1,23 +1,25 @@
 'use strict'
 
 module.exports = function (Sectionsbyuser) {
-  Sectionsbyuser.setSectionByUser = function (accessToken, cb) {
-    // Armamos la data de la respuesta profiling
-    var data = {}
+  Sectionsbyuser.setSectionByUser = function (bodyData, clientId, cb) {
+    console.log(bodyData.userData)
+    let newThemesByUser = {
+      'userData': bodyData.userData
+    }
+    let themes = JSON.parse(bodyData.themes)
+    newThemesByUser._id = newThemesByUser.userData.id
+    newThemesByUser.clienteId = clientId
+    newThemesByUser.sections = themes.sections
 
-    // Delete me
-    console.log(accessToken)
-
-    // Validamos que el usuario sea valido
-    Sectionsbyuser.app.models.EmptorRestModel.getUserData(accessToken)
-      .then(function (userData) {
-        data.userData = userData
-        cb(null, data)
+    Sectionsbyuser.app.models.ThemesByUser.create(newThemesByUser)
+      .then(function (themeByUser) {
+        console.log('Yujuuuuu')
+        cb(null, themeByUser)
       })
       .catch((err) => {
         // Handle any error that occurred in any of the previous
         // promises in the chain.
-        console.error('Error while retrieving user data!!!!')
+        console.error('Error while creating themes by user!!!!')
         console.error(err)
         cb(err)
       })
@@ -34,7 +36,33 @@ module.exports = function (Sectionsbyuser) {
   Sectionsbyuser.remoteMethod(
     'setSectionByUser',
     {
-      http: { path: '/set-section-by-user', verb: 'get' },
+      http: { path: '/set-section-by-user', verb: 'POST' },
+      accepts: [
+        {
+          arg: 'bodyData',
+          type: 'object',
+          documented: true,
+          http: { source: 'body' },
+          required: true,
+          status: 201,
+          errorStatus: 400,
+          description: [
+            'Es el objeto json de la peticion,',
+            'Un ejemplo: {}'
+          ]
+        },
+        {
+          arg: 'client_id',
+          type: 'string',
+          required: true,
+          default: 'eltiempoandroidnativo',
+          documented: true,
+          errorStatus: 400,
+          description: [
+            'ClientId field'
+          ]
+        }
+      ],
       returns: { arg: 'data', type: 'object' }
     }
   )
@@ -48,11 +76,6 @@ module.exports = function (Sectionsbyuser) {
    */
   Sectionsbyuser.beforeRemote('setSectionByUser', function (context, unused, next) {
     // Validate Authorization token
-    // @TODO we have to validate authorization
-
-    console.log('beforeRemote')
-
-    //
     Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(context.req, function (err, userData) {
       if (err) {
         next(err)
