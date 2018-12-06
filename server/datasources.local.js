@@ -27,7 +27,7 @@ module.exports = {
         ]
       },
       'template': {
-        'method': 'GET',
+        'method': 'POST',
         'url': 'https://seg.eltiempobeta.com/v2/me',
         'headers': {
           'Authorization': 'Bearer ' + '{ACCESS_TOKEN}'

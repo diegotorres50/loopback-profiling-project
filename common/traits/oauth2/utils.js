@@ -25,15 +25,15 @@ module.exports = function (oauthUtils) {
 
     //
     let reqToken = oauthUtils.getTokenFromRequestHeader(req)
-
     // Validamos que el usuario sea valido
     oauthUtils.app.models.EmptorRestModel.getUserData(reqToken)
       .then(function (userData) {
         // Called if the operation succeeds.
         console.log('userData: <<' + userData + '>> has been found.')
-        cb(null, userData)
+        cb(null, userData.data)
       })
       .catch((err) => {
+        console.log(err.message);
         // Handle any error that occurred in any of the previous
         // promises in the chain.
         console.log('buuu from getUserDatabyToken...')
