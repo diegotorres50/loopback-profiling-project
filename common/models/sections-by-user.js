@@ -48,4 +48,29 @@ module.exports = function (Sectionsbyuser) {
       returns: { arg: 'data', type: 'object' }
     }
   )
+
+  /**
+   * remote method before hook
+   * @param {object} context - this is a request context.
+   * @param {object} unused - pending.
+   * @param {object} next - object.
+   * @return {string} result of the description function.
+   */
+  Sectionsbyuser.beforeRemote('setSectionByUser', function (context, unused, next) {
+    // Validate Authorization token
+    // @TODO we have to validate authorization
+
+    console.log('beforeRemote')
+
+    //
+    Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(context.req, function (err, userData) {
+      if (err) {
+        next(err)
+      } else {
+        // Guardamos los datos del usuario en el context de la request
+        context.req.body.userData = userData
+        next()
+      }
+    })
+  })
 }

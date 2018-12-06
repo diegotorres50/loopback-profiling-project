@@ -4,6 +4,8 @@
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
+      "../common/traits",
+      "../common/traits/oauth2",
       "./models"
     ],
     "mixins": [
@@ -23,6 +25,10 @@
   },
   "sectionsByUser": {
     "dataSource": "db",
+    "public": true
+  },
+  "oauthUtils": {
+    "dataSource": false,
     "public": true
   }
 }
