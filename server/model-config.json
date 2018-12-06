@@ -16,5 +16,13 @@
   "contentSections": {
     "dataSource": "profiling_mongodb_ds",
     "public": true
+  },
+  "emptorRestModel": {
+    "dataSource": "emptor_rest_ds",
+    "public": true
+  },
+  "sectionsByUser": {
+    "dataSource": "db",
+    "public": true
   }
 }
