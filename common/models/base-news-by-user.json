@@ -1,0 +1,14 @@
+{
+  "name": "baseNewsByUser",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+
+  },
+  "validations": [],
+  "acls": [],
+  "methods": {}
+}
