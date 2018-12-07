@@ -163,7 +163,7 @@ module.exports = function (Sectionsbyuser) {
    */
   Sectionsbyuser.beforeRemote('getAllThemesByUser', function (context, unused, next) {
     // Validate Authorization token
-    Sectionsbyuser.app.models.oauthUtils.getUserDatabyBase64Token(context.args.base64_access_token, function (err, userData) {
+    Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(context.req, function (err, userData) {
       if (err) {
         console.log('buuuaaa from beforeRemote...')
         next(err)
