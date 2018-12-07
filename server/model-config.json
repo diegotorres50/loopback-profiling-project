@@ -34,5 +34,9 @@
   "themesByUser": {
     "dataSource": "profiling_mongodb_ds",
     "public": true
+  },
+  "baseNewsByUser": {
+    "dataSource": "db",
+    "public": true
   }
 }

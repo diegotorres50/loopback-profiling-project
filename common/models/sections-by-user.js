@@ -71,10 +71,9 @@ module.exports = function (Sectionsbyuser) {
     console.log(base64AccessToken)
     console.log(ctx.userData.id)
 
-    /*
-    Sectionsbyuser.app.models.ThemesByUser.find(BLA BLA BLA)
+    Sectionsbyuser.app.models.ThemesByUser.findOne({ where: { _id: ctx.userData.id } })
       .then(function (themeByUser) {
-        console.log('Yujuuuuu')
+        console.log('Yeah!!!')
         cb(null, themeByUser)
       })
       .catch((err) => {
@@ -83,7 +82,7 @@ module.exports = function (Sectionsbyuser) {
         console.error('Error while finding themes by user!!!!')
         console.error(err)
         cb(err)
-      }) */
+      })
   }
 
   /**
