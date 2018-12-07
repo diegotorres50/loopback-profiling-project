@@ -34,7 +34,7 @@ module.exports = function (ContentSection) {
    * @param {object} unused - pending.
    * @param {object} next - object.
    * @return {string} result of the description function.
-   */
+   * */
   ContentSection.afterRemote('find', function (ctx, unused, next) {
     if (ctx) {
       ctx.result = {
