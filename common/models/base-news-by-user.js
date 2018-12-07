@@ -12,7 +12,7 @@ module.exports = function (Sectionsbyuser) {
     Sectionsbyuser.app.models.ThemesByUser.findOne({ where: { _id: ctx.userData.id } })
       .then(function (themeByUser) {
         data.themesByUser = themeByUser
-        return Sectionsbyuser.app.models.ElasticRestModel.getNews(themeByUser.sections)
+        return Sectionsbyuser.app.models.ElasticRestModel.getNews(themeByUser.sections) // @todo getNews no está implementado.
       })
       .catch((err) => {
         // Handle any error that occurred in any of the previous

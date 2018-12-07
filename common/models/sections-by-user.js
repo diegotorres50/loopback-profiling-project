@@ -193,15 +193,13 @@ module.exports = function (Sectionsbyuser) {
    * @return {string} result of the description function.
    */
   Sectionsbyuser.beforeRemote('setSectionByUser', function (context, unused, next) {
-    // Validate Authorization token
-    Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(context.req, function (err, userData) {
+    validateToken(context.req, function (err, res) {
       if (err) {
-        console.log('buuu from beforeRemote...')
+        console.log(err)
         next(err)
       } else {
-        console.log('Retornando datos del usuario...')
         // Guardamos los datos del usuario en el context de la request
-        context.req.body.userData = userData
+        context.req.body.userData = res
         next()
       }
     })
@@ -215,13 +213,13 @@ module.exports = function (Sectionsbyuser) {
    * @return {string} result of the description function.
    */
   Sectionsbyuser.beforeRemote('deleteThemesByUser', function (context, unused, next) {
-    // Validate Authorization token
-    Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(context.req, function (err, userData) {
+    validateToken(context.req, function (err, res) {
       if (err) {
+        console.log(err)
         next(err)
       } else {
         // Guardamos los datos del usuario en el context de la request
-        context.req.body.userData = userData
+        context.req.body.userData = res
         next()
       }
     })
@@ -231,17 +229,25 @@ module.exports = function (Sectionsbyuser) {
    * @TODO validar que si venga un parametro access token
    */
   Sectionsbyuser.beforeRemote('getAllThemesByUser', function (context, unused, next) {
-    // Validate Authorization token
-    Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(context.req, function (err, userData) {
+    validateToken(context.req, function (err, res) {
       if (err) {
-        console.log('buuuaaa from beforeRemote...')
+        console.log(err)
         next(err)
       } else {
-        console.log('Retornando datos del usuario 2...')
         // Guardamos los datos del usuario en el context de la request
-        context.userData = userData
+        context.req.body.userData = res
         next()
       }
     })
   })
+
+  function validateToken (request, cb) {
+    Sectionsbyuser.app.models.oauthUtils.getUserDatabyToken(request, function (err, userData) {
+      if (err) {
+        cb(err)
+      } else {
+        cb(null, userData)
+      }
+    })
+  }
 }
