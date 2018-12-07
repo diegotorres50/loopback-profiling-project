@@ -192,7 +192,7 @@ module.exports = function (Sectionsbyuser) {
    * @param {object} next - object.
    * @return {string} result of the description function.
    */
-  Sectionsbyuser.beforeRemote('setSectionByUser', function (context, unused, next) {
+  Sectionsbyuser.beforeRemote('**', function (context, unused, next) {
     validateToken(context.req, function (err, res) {
       if (err) {
         console.log(err)
@@ -206,39 +206,24 @@ module.exports = function (Sectionsbyuser) {
   })
 
   /**
-   * remote method before hook
+   * remote method after hook
    * @param {object} context - this is a request context.
    * @param {object} unused - pending.
    * @param {object} next - object.
    * @return {string} result of the description function.
    */
-  Sectionsbyuser.beforeRemote('deleteThemesByUser', function (context, unused, next) {
-    validateToken(context.req, function (err, res) {
-      if (err) {
-        console.log(err)
-        next(err)
-      } else {
-        // Guardamos los datos del usuario en el context de la request
-        context.req.body.userData = res
-        next()
+  Sectionsbyuser.afterRemote('**', function (ctx, unused, next) {
+    if (ctx) {
+      ctx.result = {
+        code: 201,
+        message: 'Success',
+        data: ctx.result.data,
+        result: 'Created'
       }
-    })
-  })
-
-  /**
-   * @TODO validar que si venga un parametro access token
-   */
-  Sectionsbyuser.beforeRemote('getAllThemesByUser', function (context, unused, next) {
-    validateToken(context.req, function (err, res) {
-      if (err) {
-        console.log(err)
-        next(err)
-      } else {
-        // Guardamos los datos del usuario en el context de la request
-        context.req.body.userData = res
-        next()
-      }
-    })
+    } else {
+      next(new Error('Error'))
+    }
+    next()
   })
 
   function validateToken (request, cb) {
